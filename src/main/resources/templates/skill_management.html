@@ -1,0 +1,34 @@
+<!-- src/main/resources/templates/skill_management.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>技の管理</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <h1>技の管理</h1>
+    
+    <p>所持技一覧</p>
+    <ul>
+        <li th:each="skill : ${player.skills}">
+            <span th:text="${skill.name}"></span> - <span th:text="${skill.type}"></span>
+        </li>
+    </ul>
+
+    <p>取得可能な技一覧</p>
+    <form method="post" th:action="@{/game/get_skills}">
+        <select name="availableSkills" multiple="multiple" size="4">
+            <option th:each="availableSkill : ${player.availableSkills}"
+                    th:value="${availableSkill.id}"
+                    th:text="${availableSkill.name + ' - ' + availableSkill.type}"></option>
+        </select>
+        <br/>
+        <input type="submit" value="選択した技を取得"/>
+    </form>
+
+    <form method="post" th:action="@{/top}">
+        <input type="submit" value="トップ画面へ"/>
+    </form>
+</body>
+</html>

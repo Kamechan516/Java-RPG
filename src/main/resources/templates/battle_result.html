@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/battle_result.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>バトル結果</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/battle.css"/>
+</head>
+<body>
+    <h1>バトル結果</h1>
+	<p th:text="${battleResultMessage}"></p>
+    <div th:if="${result.isVictory}">
+        <p>おめでとうございます！バトルに勝利しました。</p>
+        <p>獲得ポイント: <span th:text="${result.points}"></span></p>
+    </div>
+
+    <div th:unless="${result.isVictory}">
+        <p>残念ながらバトルに敗北しました。</p>
+    </div>
+
+    <form method="post" th:action="@{/battle/next}">
+        <input type="submit" value="次のバトルへ進む"/>
+    </form>
+    <form method="post" th:action="@{/game/battle}">
+        <input type="submit" value="次のバトルへ進む"/>
+    </form>
+
+    <form method="post" th:action="@{/battle/give_up}">
+        <input type="submit" value="あきらめる"/>
+    </form>
+    <form method="post" th:action="@{/}">
+        <input type="submit" value="あきらめる"/>
+    </form>
+</body>
+</html>

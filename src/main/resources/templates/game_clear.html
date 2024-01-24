@@ -1,0 +1,23 @@
+<!-- src/main/resources/templates/game_clear.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ゲームクリア</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <h1>ゲームクリア！</h1>
+    
+    <p th:text="'おめでとうございます、' + ${player.name} + 'さん！'"></p>
+    
+    <p>総ターン数: <span th:text="${player.totalTurns}"></span></p>
+    <p>総獲得ポイント: <span th:text="${player.totalPoints}"></span></p>
+
+    <!-- ランキング表示など、必要な情報を追加 -->
+
+    <form method="post" th:action="@{/top}">
+        <input type="submit" value="トップ画面へ"/>
+    </form>
+</body>
+</html>

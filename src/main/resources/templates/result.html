@@ -1,0 +1,22 @@
+<!-- src/main/resources/templates/battle/result.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Battle Result</title>
+</head>
+<body>
+
+<h2>Battle Result</h2>
+
+<p>Battle ID: <span th:text="${battle.id}"></span></p>
+<p>Player: <span th:text="${player.name}"></span></p>
+<p>Job: <span th:text="${player.job}"></span></p>
+<p>Turns: <span th:text="${battle.turns}"></span></p>
+<p>Points: <span th:text="${battle.points}"></span></p>
+
+<a href="/battle/retry">Retry</a>
+<a href="/">Give up</a>
+
+</body>
+</html>

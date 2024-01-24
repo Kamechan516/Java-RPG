@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+	<properties>
+		<!-- プロパティの設定があればここに追加 -->
+	</properties>
+	<settings>
+		<!-- 遅延読み込みを有効にする -->
+		<setting name="lazyLoadingEnabled" value="true" />
+
+		<!-- カラムラベルを使用する -->
+		<setting name="useColumnLabel" value="true" />
+
+		<!-- アンダースコアで区切られたカラム名をキャメルケースに変換する -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+
+		<!-- ログを実装するために SLF4J を使用する -->
+		<setting name="logImpl" value="SLF4J" />
+
+		<!-- キャッシュを有効にする -->
+		<setting name="cacheEnabled" value="true" />
+
+		<!-- クエリの実行に許される時間を 10 秒に設定する -->
+		<setting name="defaultStatementTimeout" value="10" />
+		
+		<!-- 自動マッピング -->
+		<setting name="autoMappingUnknownColumnBehavior" value="FULL" />
+	</settings>
+	<environments = default ">
+		<environment>
+			<!-- データベースの設定 -->
+			<dataSource type="POOLED">
+				<!-- MariaDB JDBC ドライバ -->
+				<property name="driver" value="org.mariadb.jdbc.Driver" />
+
+				<!-- MariaDB 接続 URL -->
+				<property name="url"
+					value="jdbc:mariadb://localhost:3340/FriedShrimp" />
+
+				<!-- MariaDB ユーザー名 -->
+				<property name="username" value="root" />
+
+				<!-- MariaDB パスワード -->
+				<property name="password" value="12345" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- マッパーの自動リロードを有効にする -->
+	<mappers>
+		<mapper resource="com/rpg/fried_shrimp/mapper/PlayerMapper.xml" />
+	</mappers>
+
+</configuration>

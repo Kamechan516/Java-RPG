@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- src/main/resources/mapper/BattleMapper.xml -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rpg.fried_shrimp.mapper.BattleMapper">
+
+	<resultMap id="BattleResultMap" type="com.rpg.fried_shrimp.model.Battle">
+		<id property="battleId" column="battleId" />
+		<result property="playerId" column="player_id" />
+		<result property="enemyId" column="enemy_id" />
+		<result property="turn" column="turn" />
+		<result property="point" column="point" />
+		<result property="battleResult" column="battle_result" />
+		<result property="createDate" column="create_date" />
+	</resultMap>
+
+	<select id="getPoints" parameterType="com.rpg.fried_shrimp.model.Battle" >
+		SELECT point FROM battle where #[enemyId];
+	</select> 
+
+	<insert id="insert" parameterType="com.rpg.fried_shrimp.model.Battle"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO battle (player_id, enemy_id, turns, points, created_at)
+		VALUES (#{playerId}, #{enemyId}, #{turns}, #{points}, #{createdAt})
+	</insert>
+
+	<select id="findByPlayerId" resultMap="BattleResultMap">
+		SELECT * FROM battle WHERE player_id = #{playerId}
+	</select>
+
+
+	<!-- 他にも必要なクエリがあれば追加 -->
+
+</mapper>

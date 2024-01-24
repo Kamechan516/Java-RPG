@@ -1,0 +1,29 @@
+<!-- src/main/resources/templates/ranking.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ranking</title>
+</head>
+<body>
+    <h1>Ranking</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Player Name</th>
+                <th>Total Turns</th>
+                <th>Total Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ランキングデータの表示 -->
+            <tr th:each="battle : ${ranking}">
+                <td th:text="${battle.player.name}"></td>
+                <td th:text="${battle.totalTurns}"></td>
+                <td th:text="${battle.totalPoints}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- トップ画面へ戻るリンクなどを適切に設計 -->
+</body>
+</html>

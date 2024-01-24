@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- src/main/resources/mapper/PlayerMapper.xml -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rpg.fried_shrimp.mapper.PlayerMapper">
+
+	<resultMap id="PlayerResultMap"
+		type="com.rpg.fried_shrimp.model.Player">
+		<id property="playerId" column="player_id" />
+		<result property="playerName" column="player_name" />
+		<result property="jobId" column="job_id" />
+	</resultMap>
+
+
+	<select id="findById" resultMap="PlayerResultMap">
+		SELECT * FROM player WHERE id =
+		#{id}
+	</select>
+
+	<select id="findByName" resultMap="PlayerResultMap">
+		SELECT * FROM player WHERE
+		name = #{name}
+	</select>
+
+	<insert id="insertPlayer"
+		parameterType="com.rpg.fried_shrimp.model.Player"
+		useGeneratedKeys="true" keyProperty="playerId">
+		INSERT INTO player (player_name, job_id) VALUES (#{playerName}, #{jobId})
+	</insert>
+
+
+	<select id="findAll" resultMap="PlayerResultMap">
+		SELECT * FROM player
+	</select>
+
+	<update id="update"
+		parameterType="com.rpg.fried_shrimp.model.Player">
+		UPDATE player SET total_turns
+		= #{totalTurns},
+		total_points = #{totalPoints}
+		WHERE id = #{id}
+	</update>
+	<select id="findAvailableSkills"
+		resultType="com.rpg.fried_shrimp.model.PlayerSkill">
+		SELECT * FROM skill
+		WHERE id NOT IN (
+		SELECT skill_id FROM
+		player_skill WHERE player_id = #{playerId}
+		)
+	</select>
+
+	<!-- プレイヤーが技を取得 -->
+	<insert id="addSkills" parameterType="java.util.Map">
+		INSERT INTO player_skill (player_id, skill_id)
+		VALUES
+		<foreach collection="skillIds" item="skillId" separator=",">
+			(#{playerId}, #{skillId})
+		</foreach>
+	</insert>
+
+	<!-- 他にも必要なクエリがあれば追加 -->
+
+</mapper>

@@ -1,0 +1,57 @@
+/*バトル画面全体*/
+.battle_screen{
+    margin: 80px 100px 0px 100px;
+    border: 5px solid #666;
+    background-color: #d0f0d0;
+}
+
+/*敵のHPの設定*/
+.en_hp_detail{
+    margin-top: 50px;
+    margin-right: 50px;
+    font-size: 30px;
+}
+
+/*自分のHPの設定*/
+.my_hp_detail{
+    margin-bottom: 50px;
+    margin-left: 50px;
+    font-size: 30px;
+}
+
+/*バトル画面の下のバー*/
+.battle_bar{
+    border: 3px solid #d04838;
+    border-left: 6px solid #d04838;
+    border-right: 6px solid #d04838;
+    background-color: #68a0a0;
+    
+}
+
+/*バトル画面のメッセージ*/
+.message{
+    margin: 50px;
+    color: #f8f8f8;
+    font-size: 28px;
+    overflow-wrap: break-word;
+}
+
+
+/*ボタンのまとまり*/
+.battle_buttons{
+    border-top: 6px  solid #666;
+    background-color: #f8f8d8;
+    /*text-align: right;*/
+}
+
+/*バトル画面の技ボタン*/
+.battle_button{
+    margin: 8px;
+    width: 630px;
+    height: 90px;
+}
+
+body{
+    background-color: #000;
+}
+

@@ -1,0 +1,36 @@
+<!-- src/main/resources/templates/battle/start.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Battle Start</title>
+    <link rel="stylesheet" href="battle.css">
+</head>
+<body>
+    <form th:action="@{/battle/result}" th:object="${battle}" method="post">
+        <!-- バトルに関するフォーム項目を適切に設計 -->
+        <div class="battle_screen">
+            <!-- 敵HP -->
+            <p style="text-align: right;" class="en_hp_detail">敵HP100/100：</p>
+
+            <!-- 自分HP -->
+            <p class="my_hp_detail">自分HP100/100：</p>
+
+            <!-- バトルメッセージと技ボタンの大枠 -->
+            <div class="battle_bar" >
+                <!-- バトルメッセージ -->
+                <p class= "message">hello</p>
+
+                <!-- 技ボタンのまとまり -->
+                <div class="battle_buttons">
+                    <!-- 技ボタン -->
+                    <input type="submit" value="Attack1" class="battle_button">
+                    <input type="submit" value="Attack2" class="battle_button"><br/>
+                    <input type="submit" value="Attack3" class="battle_button">
+                    <input type="submit" value="Attack4" class="battle_button">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

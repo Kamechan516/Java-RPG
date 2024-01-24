@@ -1,0 +1,15 @@
+<!-- src/main/resources/templates/skills.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Player Skills</title>
+</head>
+<body>
+    <h1>Player Skills</h1>
+    <ul>
+        <!-- プレイヤーの職業が使える技の一覧を表示 -->
+        <li th:each="skill : ${player.skills}" th:text="${skill.name}"></li>
+    </ul>
+</body>
+</html>
