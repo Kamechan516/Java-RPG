@@ -1,5 +1,6 @@
 /*バトル画面全体*/
 .battle_screen{
+    padding-top: 80px;
     margin: 80px 100px 0px 100px;
     border: 5px solid #666;
     background-color: #d0f0d0;
@@ -42,13 +43,19 @@
     border-top: 6px  solid #666;
     background-color: #f8f8d8;
     /*text-align: right;*/
+    display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
 }
 
 /*バトル画面の技ボタン*/
 .battle_button{
-    margin: 8px;
+    /* margin: 8px;
     width: 630px;
+    height: 90px; */
+    width: 49%;
     height: 90px;
+    margin: 6px;
 }
 
 body{
