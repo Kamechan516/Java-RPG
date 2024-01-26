@@ -42,10 +42,9 @@
 .battle_buttons{
     border-top: 6px  solid #666;
     background-color: #f8f8d8;
-    /*text-align: right;*/
     display: flex;
- flex-direction: row;
- flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 /*バトル画面の技ボタン*/

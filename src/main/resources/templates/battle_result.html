@@ -5,32 +5,46 @@
 <head>
     <title>バトル結果</title>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="/css/battle.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/battle_result.css"/>
 </head>
 <body>
-    <h1>バトル結果</h1>
-	<p th:text="${battleResultMessage}"></p>
-    <div th:if="${result.isVictory}">
-        <p>おめでとうございます！バトルに勝利しました。</p>
-        <p>獲得ポイント: <span th:text="${result.points}"></span></p>
+    <h1>～バトル結果～</h1>
+	<p th:text="${battleResultMessage}" class="result_text"></p>
+    <!-- リザルト画面 -->
+    <div class="result_screen">
+        
+        <!-- バトルの勝敗 -->
+        <div class="Winning_vox">
+
+            <!--勝ち-->
+            <div th:if="${result.isVictory}">
+                <p class="result_text">おめでとうございます！バトルに勝利しました。</p>
+                <p class="result_text">獲得ポイント: <span th:text="${result.points}"></span></p>
+            </div>
+
+            <!--負け-->
+            <div th:unless="${result.isVictory}">
+                <p class="result_text">残念ながらバトルに敗北しました。</p>
+            </div>
+            
+        </div>
+
+        <div class="result_buttons">
+
+            <form method="post" th:action="@{/battle/next}">
+                <input type="submit" value="次のバトルへ進む" class="result_button">
+            </form>
+        
+            <form method="post" th:action="@{/battle/give_up}">
+                <input type="submit" value="あきらめる" class="result_button">
+            </form>
+
+        </div>
     </div>
+    
 
-    <div th:unless="${result.isVictory}">
-        <p>残念ながらバトルに敗北しました。</p>
-    </div>
+    
 
-    <form method="post" th:action="@{/battle/next}">
-        <input type="submit" value="次のバトルへ進む"/>
-    </form>
-    <form method="post" th:action="@{/game/battle}">
-        <input type="submit" value="次のバトルへ進む"/>
-    </form>
-
-    <form method="post" th:action="@{/battle/give_up}">
-        <input type="submit" value="あきらめる"/>
-    </form>
-    <form method="post" th:action="@{/}">
-        <input type="submit" value="あきらめる"/>
-    </form>
+    
 </body>
 </html>

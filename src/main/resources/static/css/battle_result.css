@@ -1,0 +1,41 @@
+h1{
+    color: #fff;
+    text-align: center;
+}
+
+body{
+    background-color: #000;
+}
+
+/*リザルト画面全体*/
+.result_screen{
+    padding-top: 80px;
+    margin: 80px 100px 0px 100px;
+    border: 5px solid #666;
+    background-color: #fff;
+}
+
+/*テキスト設定*/
+.result_text{
+    font-size: 30px;
+    text-align: center;
+}
+
+.Winning_vox{
+    border-bottom: 5px solid #666;
+}
+
+.result_buttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.result_button{
+    
+    width: 200px;
+    height: 90px;
+    margin: 10px;   
+}
