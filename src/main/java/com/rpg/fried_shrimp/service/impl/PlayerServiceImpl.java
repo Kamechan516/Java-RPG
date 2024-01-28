@@ -15,7 +15,11 @@ public class PlayerServiceImpl implements PlayerService {
 	@Autowired
 	private PlayerMapper playerMapper;
 
-	@Override
+	public Player selectPlayer(int id) {
+		Player player = playerMapper.selectPlayer(id);
+		return player;
+	}
+
 	public Player getPlayerById(int id) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
@@ -57,10 +61,10 @@ public class PlayerServiceImpl implements PlayerService {
 		}
 	}
 
-	public int insertPlayer(String playerName, int jobId) {
-		// プレイヤーを挿入し、挿入後のプレイヤーIDを取得
-		Player newPlayer = createPlayer(playerName, jobId);
-		return newPlayer.getPlayerId();
-	}
+	// public int insertPlayer(String playerName, int jobId) {
+	// 	// プレイヤーを挿入し、挿入後のプレイヤーIDを取得
+	// 	Player newPlayer = createPlayer(playerName, jobId);
+	// 	return newPlayer.getPlayerId();
+	// }
 
 }

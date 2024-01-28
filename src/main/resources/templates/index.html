@@ -41,7 +41,7 @@
 <body>
     <h1>FriedShrimp Game</h1>
 
-    <form th:action="@{/create/player}" method="post" th:object="${player}" id="playerForm">
+    <form th:action="@{/createPlayer}" method="post" th:object="${player}" id="playerForm">
         <label for="playerName">プレイヤー名: </label>
         <input type="text" id="playerName" name="playerName" required>
 
@@ -52,7 +52,7 @@
         </select>
 
         <button type="button" onclick="showRanking()">ランキング表示</button>
-        <button type="button" onclick="startGame()">Start Game</button>
+        <button type="submit" onclick="startGame()">Start Game</button>
     </form>
 
     <script>

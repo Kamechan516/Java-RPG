@@ -18,4 +18,6 @@ public interface PlayerMapper {
 	Player insertPlayer(String playerName, int jobId);
 
 	int insertPlayer(Player newPlayer);
+
+	Player selectPlayer(int PlayerId);
 }
