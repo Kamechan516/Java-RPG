@@ -10,6 +10,8 @@ import com.rpg.fried_shrimp.model.Battle;
 @Mapper
 public interface BattleMapper {
 
+    Battle setBattle(int battleId);
+
     Battle insert(SetBattle setBattle);
 
     int getPoint(int enemyId);

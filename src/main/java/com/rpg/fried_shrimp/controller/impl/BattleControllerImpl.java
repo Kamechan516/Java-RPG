@@ -46,7 +46,7 @@ public class BattleControllerImpl {
 
         // バトルの初期化
         int battleId = initializeBattle(player, job, enemy);
-        Battle battle = battleService.getBattleById(battleId);
+        Battle battle = battleService.setBattle(battleId);
         
        
         
@@ -55,7 +55,8 @@ public class BattleControllerImpl {
         model.addAttribute("job", job);
         model.addAttribute("enemy", enemy);
 
-        return "redirect:/battle/" + playerId;
+
+        return "battle";
     }
 
 

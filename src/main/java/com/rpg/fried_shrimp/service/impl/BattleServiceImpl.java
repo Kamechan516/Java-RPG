@@ -3,7 +3,6 @@ package com.rpg.fried_shrimp.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rpg.fried_shrimp.dto.SetBattle;
 import com.rpg.fried_shrimp.mapper.BattleMapper;
 import com.rpg.fried_shrimp.model.Battle;
 import com.rpg.fried_shrimp.model.Battle.BattleResult;
@@ -28,20 +27,16 @@ public class BattleServiceImpl implements BattleService {
 
     }
 
-    public Battle setBattle(SetBattle setBattle) {
+    @Override
+    public Battle setBattle(int battleId) {
         // TODO 自動生成されたメソッド・スタブ
-        return battleMapper.insert(setBattle);
+        return battleMapper.setBattle(battleId);
     }
 
     @Override
     public BattleResult startBattle(Player player, int enemyId) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
-    }
-
-    public void setBattle(Battle battle) {
-        // TODO 自動生成されたメソッド・スタブ
-
     }
 
     public int insertBattle(Battle battle) {

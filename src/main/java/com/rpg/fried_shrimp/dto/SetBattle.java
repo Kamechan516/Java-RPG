@@ -7,5 +7,8 @@ public class SetBattle implements Serializable {
 	int battleId;
 	int playerId;
 	int enemyId;
+	int turn;
+	int playerHp;
+	int enemyHp;
 
 }

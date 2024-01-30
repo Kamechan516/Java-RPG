@@ -13,19 +13,29 @@
         <!-- バトルに関するフォーム項目を適切に設計 -->
         <div class="battle_screen">
             <!-- 敵HP -->
-            <p style="text-align: right;" class="en_hp_detail">HP<span th:value="${battle.enemyHp}"></span></p>
+            <div class="en_hp_detail">
+                <label for="enemyHp">Enemy HP</label>
+                <div class="progress">
+                    <!-- enemyHpがnullでないことを確認してから計算を行う -->
+                    <div class="progress-bar" role="progressbar" th:if="${battle.enemyHp != null}" th:style="'width: ' + ${battle.enemyHp * 100 / enemy.enemyHp} + '%'"></div>
+                    <!-- enemyHpがnullの場合は適切な処理を行う -->
+                    <div class="progress-bar" role="progressbar" th:if="${battle.enemyHp == null}" th:style="'width: 0%'"></div>
+                    <span th:text="${battle.enemyHp}"></span>
+                </div>
+            </div>
 
             <!-- 自分HP -->
             <div class="my_hp_detail">
-                <label for="playerHp">HP</label>
+                <label for="playerHp">Your HP</label>
                 <div class="progress">
                     <!-- playerHpがnullでないことを確認してから計算を行う -->
-                    <div class="progress-bar" role="progressbar" th:if="${battle.playerHp != null}" th:style="'width: ' + ${battle.playerHp * 100 / battle.maxHp} + '%'"></div>
+                    <div class="progress-bar" role="progressbar" th:if="${battle.playerHp != null}" th:style="'width: ' + ${battle.playerHp * 100 / job.jobHp} + '%'"></div>
                     <!-- playerHpがnullの場合は適切な処理を行う -->
                     <div class="progress-bar" role="progressbar" th:if="${battle.playerHp == null}" th:style="'width: 0%'"></div>
-                    <span th:value="${battle.playerHp}"></span>
+                    <span th:text="${battle.playerHp}"></span>
                 </div>
             </div>
+
             <!-- プレイヤー名とジョブ名 -->
             <p class="player_detail">
                 プレイヤー：<span th:text="${player.playerName}"></span><br/>

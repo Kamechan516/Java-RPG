@@ -54,7 +54,10 @@
         UPDATE battle SET player_hp = #{playerHp}, enemy_hp = #{enemyHp}, turn = #{turn}, 
             battle_result = #{battleResult} WHERE battle_id = #{battleId}
     </update>
-    <!-- 他にも必要なマッピングがあれば追加 -->
+    
+    <select id="setBattle" parameterType="com.rpg.fried_shrimp.model.Battle">
+        SELECT * FROM battle WHERE battle_id = #{battleId}
+    </select>
 
 
 </mapper>
