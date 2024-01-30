@@ -11,6 +11,7 @@
 		<result property="plSkillName" column="pl_skill_name" />
 		<result property="plSkillType" column="pl_skill_type" />
 		<result property="plSkillEffect" column="pl_skill_effect" />
+		<result property="plSkillRemain" column="pl_skill_remain" />
 		<result property="jobId" column="job_id" />
 	</resultMap>
 

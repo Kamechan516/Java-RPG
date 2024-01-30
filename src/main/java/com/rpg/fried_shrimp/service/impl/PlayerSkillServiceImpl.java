@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.rpg.fried_shrimp.mapper.SkillMapper;
 import com.rpg.fried_shrimp.model.PlayerSkill;
-import com.rpg.fried_shrimp.service.SkillService;
+import com.rpg.fried_shrimp.service.PlayerSkillService;
 
 @Service
-public class SkillServiceImpl implements SkillService {
+public class PlayerSkillServiceImpl implements PlayerSkillService {
 
 	@Autowired
 	SkillMapper skillMapper;

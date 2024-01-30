@@ -9,6 +9,7 @@ public class PlayerSkill {
 	private String plSkillName;
 	private Pl_SkillType plSkillType;
 	private int plSkillEffect;
+	private int plSkillRemain;
 	private int jobId;
 
 	public enum Pl_SkillType {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.rpg.fried_shrimp.model.PlayerSkill;
 
-public interface SkillService {
+public interface PlayerSkillService {
 	PlayerSkill getSkillById(int id);
 
 	List<PlayerSkill> getAllSkills();

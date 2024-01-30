@@ -11,6 +11,14 @@
 		type="com.rpg.fried_shrimp.model.Player">
 		<id property="playerId" column="player_id" />
 		<result property="playerName" column="player_name" />
+		<result property="plSkill1" column="pl_skill1" />
+		<result property="plSkill2" column="pl_skill2" />
+		<result property="plSkill3" column="pl_skill3" />
+		<result property="plSkill4" column="pl_skill4" />
+		<result property="plSkillRemain1" column="pl_skill_remain1" />
+		<result property="plSkillRemain2" column="pl_skill_remain2" />
+		<result property="plSkillRemain3" column="pl_skill_remain3" />
+		<result property="plSkillRemain4" column="pl_skill_remain4" />
 		<result property="jobId" column="job_id" />
 	</resultMap>
 

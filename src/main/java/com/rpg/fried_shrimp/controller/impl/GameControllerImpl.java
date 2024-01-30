@@ -17,7 +17,7 @@ import com.rpg.fried_shrimp.model.Battle;
 import com.rpg.fried_shrimp.model.Job;
 import com.rpg.fried_shrimp.model.Player;
 import com.rpg.fried_shrimp.service.impl.PlayerServiceImpl;
-import com.rpg.fried_shrimp.service.impl.SkillServiceImpl;
+import com.rpg.fried_shrimp.service.impl.PlayerSkillServiceImpl;
 
 @Controller
 public class GameControllerImpl implements GameController {
@@ -29,7 +29,7 @@ public class GameControllerImpl implements GameController {
 	private PlayerMapper playerMapper;
 
 	@Autowired
-	private SkillServiceImpl skillService;
+	private PlayerSkillServiceImpl skillService;
 
 	@Autowired
 	private PlayerServiceImpl playerService;
