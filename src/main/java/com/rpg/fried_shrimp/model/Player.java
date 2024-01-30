@@ -11,4 +11,9 @@ public class Player {
 	
 	private int jobId;
 
+    public int performAction(int playerHp) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'performAction'");
+    }
+
 }

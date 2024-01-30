@@ -5,29 +5,45 @@
 <head>
     <title>Battle Start</title>
     <link rel="stylesheet" th:href="@{/css/battle.css}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script th:src="@{/js/battle.js}"></script>
 </head>
 <body>
     <form th:action="@{/battle/result}" th:object="${battle}" method="post">
         <!-- バトルに関するフォーム項目を適切に設計 -->
         <div class="battle_screen">
             <!-- 敵HP -->
-            <p style="text-align: right;" class="en_hp_detail">敵HP100/100：</p>
+            <p style="text-align: right;" class="en_hp_detail">HP<span th:value="${battle.enemyHp}"></span></p>
 
             <!-- 自分HP -->
-            <p class="my_hp_detail">自分HP100/100：</p>
+            <div class="my_hp_detail">
+                <label for="playerHp">HP</label>
+                <div class="progress">
+                    <!-- playerHpがnullでないことを確認してから計算を行う -->
+                    <div class="progress-bar" role="progressbar" th:if="${battle.playerHp != null}" th:style="'width: ' + ${battle.playerHp * 100 / battle.maxHp} + '%'"></div>
+                    <!-- playerHpがnullの場合は適切な処理を行う -->
+                    <div class="progress-bar" role="progressbar" th:if="${battle.playerHp == null}" th:style="'width: 0%'"></div>
+                    <span th:value="${battle.playerHp}"></span>
+                </div>
+            </div>
+            <!-- プレイヤー名とジョブ名 -->
+            <p class="player_detail">
+                プレイヤー：<span th:text="${player.playerName}"></span><br/>
+                ジョブ：<span th:text="${job.jobName}"></span>
+            </p>
 
             <!-- バトルメッセージと技ボタンの大枠 -->
-            <div class="battle_bar" >
+            <div class="battle_bar">
                 <!-- バトルメッセージ -->
-                <p class= "message">hello</p>
+                <p class="message" id="battleMessage">hello</p>
 
                 <!-- 技ボタンのまとまり -->
                 <div class="battle_buttons">
                     <!-- 技ボタン -->
-                    <input type="submit" value="Attack1" class="battle_button">
-                    <input type="submit" value="Attack2" class="battle_button"><br/>
-                    <input type="submit" value="Attack3" class="battle_button">
-                    <input type="submit" value="Attack4" class="battle_button">
+                    <input type="button" value="Attack1" class="battle_button" onclick="attack(1)">
+                    <input type="button" value="Attack2" class="battle_button" onclick="attack(2)"><br/>
+                    <input type="button" value="Attack3" class="battle_button" onclick="attack(3)">
+                    <input type="button" value="Attack4" class="battle_button" onclick="attack(4)">
                 </div>
             </div>
         </div>

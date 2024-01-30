@@ -16,5 +16,8 @@
 		select * from job
 	</select>
 
+	<select id="selectJob" resultMap="JobResultMap">
+		select * from job where job_id = #{jobId}
+	</select>
 
 </mapper>

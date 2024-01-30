@@ -37,6 +37,12 @@
     overflow-wrap: break-word;
 }
 
+/*プレイヤー名とジョブ名の設定*/
+.player_detail{
+    margin: 10px;
+    font-size: 20px;
+}
+
 
 /*ボタンのまとまり*/
 .battle_buttons{
@@ -59,5 +65,27 @@
 
 body{
     background-color: #000;
+}
+
+/* 自分のHPの設定 */
+.my_hp_detail {
+    margin-bottom: 50px;
+    margin-left: 50px;
+    font-size: 30px;
+}
+
+/* プログレスバーのスタイル */
+.progress {
+    height: 30px;
+    background-color: #ddd;
+}
+
+.progress-bar {
+    height: 100%;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #28a745; /* プログレスバーの色（例: 緑色） */
 }
 

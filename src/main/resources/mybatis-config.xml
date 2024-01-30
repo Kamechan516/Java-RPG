@@ -46,7 +46,7 @@
 				<property name="username" value="root" />
 
 				<!-- MariaDB パスワード -->
-				<property name="password" value="12345" />
+				<property name="password" value="Password-1234" />
 			</dataSource>
 		</environment>
 	</environments>

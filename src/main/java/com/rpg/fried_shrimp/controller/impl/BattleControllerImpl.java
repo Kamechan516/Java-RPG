@@ -1,110 +1,153 @@
 package com.rpg.fried_shrimp.controller.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.rpg.fried_shrimp.controller.BattleController;
-import com.rpg.fried_shrimp.dto.SetBattle;
+import com.rpg.fried_shrimp.mapper.JobMapper;
 import com.rpg.fried_shrimp.model.Battle;
+import com.rpg.fried_shrimp.model.Enemy;
+import com.rpg.fried_shrimp.model.Job;
+import com.rpg.fried_shrimp.model.Player;
 import com.rpg.fried_shrimp.service.impl.BattleServiceImpl;
+import com.rpg.fried_shrimp.service.impl.EnemyServiceImpl;
 import com.rpg.fried_shrimp.service.impl.PlayerServiceImpl;
-import com.rpg.fried_shrimp.service.impl.SkillServiceImpl;
 
-@RequestMapping(value = "/battle")
-public class BattleControllerImpl implements BattleController {
+@Controller
+public class BattleControllerImpl {
 
-	@Autowired
-	BattleServiceImpl battleService;
-	@Autowired
-	PlayerServiceImpl playerService;
-	@Autowired
-	SkillServiceImpl skillService;
+    @Autowired
+    BattleServiceImpl battleService;
+    @Autowired
+    PlayerServiceImpl playerService;
+    @Autowired
+    EnemyServiceImpl enemyService;
+    @Autowired
+    JobMapper jobMapper;
 
-	// @GetMapping(value = "start")
-	// public String battle(@ModelAttribute SetBattle setbattle, Model model) {
-	// 	Battle battle = battleService.setBattle(setbattle);
+    @GetMapping("/battle/{playerId}")
+    public String battleStart(@PathVariable int playerId, Model model) {
+        Player player = playerService.selectPlayer(playerId);
+        Job job = jobMapper.selectJob(player.getJobId());
 
-	// 	int generatedBattleId = battle.getBattleId();
-
-	// 	// 取得したBattleIdを使用して動的なURLを生成する
-	// 	String dynamicUrl = "" + generatedBattleId;
-		
-	// 	model.addAttribute("battle", battle);
-	// 	// リダイレクト
-	// 	return "redirect:" + dynamicUrl;
-	// }
-
-	// @GetMapping(value = "{battleId}")
-	// public String showBattle(@PathVariable int battleId, Model model) {
-	// 	// BattleIdを使って必要なデータを取得する処理を実装
-	// 	Battle battle = battleService.getBattleById(battleId);
-
-	// 	// モデルに必要なデータを追加
-	// 	model.addAttribute("battle", battle);
-
-	// 	// battle.htmlを表示する
-	// 	return "battle";
-	// }
-
-	// サーバーサイドのコントローラ
-	@GetMapping("/battle/update")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> updateBattle() {
-    	// データベースから取得した情報（例：プレイヤー名、敵名、技名）
-    	List Player = playerService.selectPlayer();
-    	String enemyName = enemyService.getEnemyName();
-    	String skillName = skillService.getSkillName();
-
-   		// バトルメッセージの動的な生成
-    	String battleMessage = playerName + "は" + enemyName + "に" + skillName + "を使った！";
-
-    	// JSON形式でクライアントに返すデータ
- 		Map<String, Object> responseData = new HashMap<>();
-    	responseData.put("battleMessage", battleMessage);
-    	responseData.put("playerHP", /* ここにプレイヤーのHP */);
-    	responseData.put("enemyHP", /* ここに敵のHP */);
-
-    	return ResponseEntity.ok(responseData);
-	}
+        // Enemy情報の取得
+        // バトルの初期化
+        int enemyId = new Random().nextInt(3) + 1; // またはランダムに決定
+        Enemy enemy = enemyService.selectEnemy(enemyId);
 
 
-	@Override
-	public String battleResult(Battle battle, Model model) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 
-	@Override
-	public String retryBattle(Long enemyId, Model model) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+        // バトルの初期化
+        int battleId = initializeBattle(player, job, enemy);
+        Battle battle = battleService.getBattleById(battleId);
+        
+       
+        
+        model.addAttribute("battle", battle);
+        model.addAttribute("player", player);
+        model.addAttribute("job", job);
+        model.addAttribute("enemy", enemy);
 
-	@Override
-	public String nextBattle() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+        return "redirect:/battle/" + playerId;
+    }
 
-	@Override
-	public String giveUp() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 
-	@Override
+    private int initializeBattle(Player player, Job job, Enemy enemy) {
+        Battle battle = new Battle();
+        battle.setPlayerId(player.getPlayerId());
+    
+        // プレイヤーの初期HPを設定
+        battle.setPlayerHp(job.getJobHp());
+    
+        // 敵情報がnullでないことを確認
+        if (enemy != null) {
+            battle.setEnemyId(enemy.getEnemyId());
+            // 敵の初期HPを設定
+            battle.setEnemyHp(enemy.getEnemyHp());
+        } else {
+            // エラーハンドリングやデフォルトの敵情報の設定などを行う
+            // 例: battle.setEnemyId(defaultEnemyId);
+            //     battle.setEnemyHp(defaultEnemyHp);
+        }
+    
+        battle.setTurn(0);
+        battle.setCreateDate(new Timestamp(System.currentTimeMillis()));
+        battle.setBattleResult(null);
+    
+        int battleId = battleService.insertBattle(battle);
+    
+        return battleId;
+    }
+    
+    
+
+    @PostMapping("/update")
+    public void updateBattle(@RequestParam int battleId) {
+        Battle battle = battleService.getBattleById(battleId);
+    
+        Player player = playerService.selectPlayer(battle.getPlayerId());
+        int updatedPlayerHp = player.performAction(battle.getPlayerHp());
+        battle.setPlayerHp(updatedPlayerHp);
+    
+        Enemy enemy = enemyService.selectEnemy(battle.getEnemyId());
+        int updatedEnemyHp = enemy.performAction(battle.getEnemyHp());
+        battle.setEnemyHp(updatedEnemyHp);
+    
+        battle.setTurn(battle.getTurn() + 1);
+    
+        battleService.updateBattle(battle);
+    }
+    
+    // バトル結果を判定するメソッド（例）
+    // private Battle.BattleResult calculateBattleResult(int playerHp, int enemyHp) {
+    //     if (playerHp <= 0 && enemyHp <= 0) {
+    //         return Battle.BattleResult.DRAW;
+    //     } else if (playerHp <= 0) {
+    //         return Battle.BattleResult.DEFEAT;
+    //     } else if (enemyHp <= 0) {
+    //         return Battle.BattleResult.VICTORY;
+    //     } else {
+    //         return Battle.BattleResult.IN_PROGRESS;
+    //     }
+    // }
+    
+
+	
 	public String startBattle(Model model) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'startBattle'");
 	}
 
+	
+	public String battleResult(Battle battle, Model model) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'battleResult'");
+	}
+
+
+	public String retryBattle(int enemyId, Model model) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'retryBattle'");
+	}
+
+	
+	public String nextBattle() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'nextBattle'");
+	}
+
+	
+	public String giveUp() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'giveUp'");
+	}
+
+    // ...（その他のメソッド）
 }
