@@ -82,9 +82,10 @@ public class BattleControllerImpl {
         battle.setCreateDate(new Timestamp(System.currentTimeMillis()));
         battle.setBattleResult(null);
     
-        int battleId = battleService.insertBattle(battle);
+        // 戻り値はinsertしたバトルのIDではない
+        battleService.insertBattle(battle);
     
-        return battleId;
+        return battle.getBattleId();
     }
     
     

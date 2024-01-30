@@ -29,8 +29,8 @@ public class BattleServiceImpl implements BattleService {
 
     @Override
     public Battle setBattle(int battleId) {
-        // TODO 自動生成されたメソッド・スタブ
-        return battleMapper.setBattle(battleId);
+        Battle battle = battleMapper.getBattleById(battleId);
+        return battle;
     }
 
     @Override

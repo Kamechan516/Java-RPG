@@ -1,83 +1,86 @@
-/*バトル画面全体*/
-.battle_screen{
-    padding-top: 80px;
-    margin: 80px 100px 0px 100px;
+
+/* バトル画面全体 */
+.battle_screen {
+    padding-top: 20px;
+    margin: 20px; /* 上下左右の余白を調整 */
     border: 5px solid #666;
     background-color: #d0f0d0;
+    display: flex; /* 要素を右から左に配置 */
+    justify-content: space-between; /* 要素を左右に配置 */
+    align-items: flex-start; /* 要素を上揃えに配置 */
 }
 
-/*敵のHPの設定*/
-.en_hp_detail{
+/* 敵のHPの設定 */
+.en_hp_detail {
     margin-top: 50px;
-    margin-right: 50px;
+    margin-left: 200px; /* 位置を左に配置 */
     font-size: 30px;
 }
 
-/*自分のHPの設定*/
-.my_hp_detail{
+/* 敵の画像サイズを指定 */
+.en_hp_detail img {
+    max-width: 300px; /* 画像の最大幅を指定 */
+    max-height: 400px; /* 画像の最大高さを指定 */
+}
+
+.my_hp_detail img {
+    max-width: 300px; /* 画像の最大幅を指定 */
+    max-height: 400px; /* 画像の最大高さを指定 */
+}
+
+/* 自分HPの設定 */
+.my_hp_detail {
     margin-bottom: 50px;
-    margin-left: 50px;
+    margin-right: 20px; /* 右側の余白を追加 */
+    padding: 20px; /* 余白を追加 */
     font-size: 30px;
 }
 
-/*バトル画面の下のバー*/
-.battle_bar{
+/* バトル画面の下のバー */
+.battle_bar {
     border: 3px solid #d04838;
     border-left: 6px solid #d04838;
     border-right: 6px solid #d04838;
     background-color: #68a0a0;
-    
 }
 
-/*バトル画面のメッセージ*/
-.message{
+/* バトル画面の技ボタン */
+.battle_buttons {
+    border-top: 6px solid #666;
+    background-color: #f8f8d8;
+    display: flex; /* 要素を左から右に配置 */
+    justify-content: space-evenly; /* ボタンを等間隔に配置 */
+}
+
+/* バトル画面の技ボタン */
+.battle_button {
+    width: 50%; /* 幅を変更して横に2つずつ並べる */
+    height: 90px;
+    margin: 6px;
+}
+
+/* バトル画面のメッセージ */
+.message {
     margin: 50px;
     color: #f8f8f8;
     font-size: 28px;
     overflow-wrap: break-word;
 }
 
-/*プレイヤー名とジョブ名の設定*/
-.player_detail{
+/* プレイヤー名とジョブ名の設定 */
+.player_detail {
     margin: 10px;
     font-size: 20px;
 }
 
-
-/*ボタンのまとまり*/
-.battle_buttons{
-    border-top: 6px  solid #666;
-    background-color: #f8f8d8;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-/*バトル画面の技ボタン*/
-.battle_button{
-    /* margin: 8px;
-    width: 630px;
-    height: 90px; */
-    width: 49%;
-    height: 90px;
-    margin: 6px;
-}
-
-body{
+body {
     background-color: #000;
-}
-
-/* 自分のHPの設定 */
-.my_hp_detail {
-    margin-bottom: 50px;
-    margin-left: 50px;
-    font-size: 30px;
 }
 
 /* プログレスバーのスタイル */
 .progress {
     height: 30px;
-    background-color: #ddd;
+    background-color: #28a745;
 }
 
 .progress-bar {
@@ -86,6 +89,19 @@ body{
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: #28a745; /* プログレスバーの色（例: 緑色） */
+    background-color: #ddd;
+    /* プログレスバーの色（例: 緑色） */
 }
 
+/* 追加したスタイル */
+.player_progress {
+    margin-top: 10px; /* プレイヤーバーとプレイヤー名の間の余白 */
+}
+
+/* プレイヤー名とジョブ名の設定 */
+.player_detail {
+    position: absolute;
+    top: 550px; /* 上部からの位置 */
+    right: 120px; /* 右側からの位置 */
+    font-size: 20px;
+}

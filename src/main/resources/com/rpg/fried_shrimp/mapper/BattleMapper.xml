@@ -22,11 +22,8 @@
     </select>
 
     <insert id="insertBattle" parameterType="com.rpg.fried_shrimp.model.Battle" useGeneratedKeys="true" keyProperty="battleId">
-    <selectKey keyProperty="battleId" order="AFTER" resultType="int">
-        SELECT LAST_INSERT_ID()
-    </selectKey>
-    INSERT INTO battle (player_id, enemy_id, player_hp, enemy_hp, turn, create_date, battle_result)
-    VALUES (#{playerId}, #{enemyId}, #{playerHp}, #{enemyHp}, #{turn}, #{createDate}, #{battleResult})
+        INSERT INTO battle (player_id, enemy_id, player_hp, enemy_hp, turn, create_date, battle_result)
+        VALUES (#{playerId}, #{enemyId}, #{playerHp}, #{enemyHp}, #{turn}, #{createDate}, #{battleResult})
     </insert>
 
 
