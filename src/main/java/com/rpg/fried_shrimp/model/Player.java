@@ -25,4 +25,9 @@ public class Player {
         throw new UnsupportedOperationException("Unimplemented method 'performAction'");
     }
 
+    public int getVictories() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getVictories'");
+    }
+
 }

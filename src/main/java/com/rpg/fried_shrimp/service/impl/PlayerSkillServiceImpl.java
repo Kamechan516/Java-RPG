@@ -1,44 +1,38 @@
 package com.rpg.fried_shrimp.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rpg.fried_shrimp.mapper.SkillMapper;
+import com.rpg.fried_shrimp.mapper.PlayerSkillMapper;
+import com.rpg.fried_shrimp.model.Player;
 import com.rpg.fried_shrimp.model.PlayerSkill;
 import com.rpg.fried_shrimp.service.PlayerSkillService;
 
 @Service
 public class PlayerSkillServiceImpl implements PlayerSkillService {
 
-	@Autowired
-	SkillMapper skillMapper;
+    @Autowired
+    PlayerSkillMapper playerSkillMapper;
 
-	@Override
-	public PlayerSkill getSkillById(int id) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    @Override
+    public PlayerSkill getSkillById(int id) {
+        return playerSkillMapper.getSkillById(id);
+    }
 
-	@Override
-	public List<PlayerSkill> getAllSkills() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    
+    public List<PlayerSkill> getAllSkills(int jobId) {
+        return playerSkillMapper.getAllSkills(jobId);
+    }
 
-	@Override
-	public void createSkill(PlayerSkill playerSkill) {
-		// TODO 自動生成されたメソッド・スタブ
 
-	}
+    @Override
+    public List<PlayerSkill> getPlayerSkills(Player player) {
+        return playerSkillMapper.findPlayerSkills(player);
+    }
 
-	@Override
-	public List<PlayerSkill> getPlayerSkills(int playerId) {
-		
-		List<PlayerSkill> playerSkill = skillMapper.findPlayerSkills(playerId);
-
-		return playerSkill;
-	}
-
+    public List<PlayerSkill> getSelectedSkills(List<Integer> selectedSkillIds) {
+        return playerSkillMapper.getSelectedSkills(selectedSkillIds);
+        
+    }
 }

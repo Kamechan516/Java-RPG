@@ -1,6 +1,7 @@
 package com.rpg.fried_shrimp.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,4 +21,7 @@ public interface PlayerMapper {
 	int insertPlayer(Player newPlayer);
 
 	Player selectPlayer(int PlayerId);
+
+     void updateSkills(Map<String, Object> params);
+
 }

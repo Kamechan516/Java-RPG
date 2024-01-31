@@ -12,4 +12,6 @@ public interface JobMapper {
 	public List<Job> getAllJob();
 
 	public Job selectJob(int jobId);
+
+    public int getJobHp(int jobId);
 }

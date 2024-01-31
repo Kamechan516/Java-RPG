@@ -1,5 +1,6 @@
 package com.rpg.fried_shrimp.model;
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -36,6 +37,11 @@ public class Battle {
     public void setCurrentTurn(int determineInitialTurn) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setCurrentTurn'");
+    }
+
+    public void setPlayerSkills(List<PlayerSkill> selectedSkills) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPlayerSkills'");
     }
   
 }

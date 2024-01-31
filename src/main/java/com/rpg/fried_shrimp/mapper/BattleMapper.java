@@ -30,5 +30,7 @@ public interface BattleMapper {
 
     void updateBattle(Battle battle);
 
+    void saveBattle(Battle battle);
+
 }
 

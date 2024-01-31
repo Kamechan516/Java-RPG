@@ -72,6 +72,19 @@
 		select * from player where player_id = #{playerId}
 	</select>
 
+	<select id="getPlayerById" resultMap="PlayerResultMap">
+		select * from player where player_id = #{playerId}
+	</select>
+
+	<update id="updateSkills" parameterType="java.util.HashMap">
+        UPDATE player
+        SET
+        pl_skill1 = #{skill1},
+        pl_skill2 = #{skill2},
+        pl_skill3 = #{skill3},
+        pl_skill4 = #{skill4}
+        WHERE pl_id = #{playerId}
+    </update>
 	<!-- 他にも必要なクエリがあれば追加 -->
 
 </mapper>

@@ -20,4 +20,7 @@
 		select * from job where job_id = #{jobId}
 	</select>
 
+	<select id="getJobHp" resultType="int">
+		select job_hp from job where job_id = #{jobId}
+	</select>
 </mapper>
