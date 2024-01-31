@@ -1,37 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- src/main/resources/mapper/BattleMapper.xml -->
-
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.rpg.fried_shrimp.mapper.BattleMapper">
 
-	<resultMap id="BattleResultMap" type="com.rpg.fried_shrimp.model.Battle">
-		<id property="battleId" column="battleId" />
-		<result property="playerId" column="player_id" />
-		<result property="enemyId" column="enemy_id" />
-		<result property="turn" column="turn" />
-		<result property="point" column="point" />
-		<result property="battleResult" column="battle_result" />
-		<result property="createDate" column="create_date" />
-	</resultMap>
+    <resultMap id="BattleResultMap" type="com.rpg.fried_shrimp.model.Battle">
+        <id property="battleId" column="battle_id" />
+        <result property="playerId" column="player_id" />
+        <result property="enemyId" column="enemy_id" />
+        <result property="playerHp" column="player_hp" />
+        <result property="enemyHp" column="enemy_hp" />
+        <result property="turn" column="turn" />
+        <!-- 手動で追加したマッピング -->
+        <result property="battleResult" column="battle_result" jdbcType="VARCHAR" javaType="com.rpg.fried_shrimp.model.Battle$BattleResult" />
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
-	<select id="getPoints" parameterType="com.rpg.fried_shrimp.model.Battle" >
-		SELECT point FROM battle where #[enemyId];
-	</select> 
+    <select id="getPoints" parameterType="com.rpg.fried_shrimp.model.Battle" resultType="int">
+        SELECT point FROM battle WHERE enemy_id = #{enemyId}
+    </select>
 
-	<insert id="insert" parameterType="com.rpg.fried_shrimp.model.Battle"
-		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO battle (player_id, enemy_id, turns, points, created_at)
-		VALUES (#{playerId}, #{enemyId}, #{turns}, #{points}, #{createdAt})
-	</insert>
-
-	<select id="findByPlayerId" resultMap="BattleResultMap">
-		SELECT * FROM battle WHERE player_id = #{playerId}
-	</select>
+    <insert id="insertBattle" parameterType="com.rpg.fried_shrimp.model.Battle" useGeneratedKeys="true" keyProperty="battleId">
+        INSERT INTO battle (player_id, enemy_id, player_hp, enemy_hp, turn, create_date, battle_result)
+        VALUES (#{playerId}, #{enemyId}, #{playerHp}, #{enemyHp}, #{turn}, #{createDate}, #{battleResult})
+    </insert>
 
 
-	<!-- 他にも必要なクエリがあれば追加 -->
+    <select id="findByPlayerId" resultMap="BattleResultMap" parameterType="int">
+        SELECT * FROM battle WHERE player_id = #{playerId}
+    </select>
+    
+    <select id="getBattleById" resultMap="BattleResultMap" parameterType="int">
+        SELECT * FROM battle WHERE battle_id = #{battleId}
+    </select>
+
+    <update id="updateBattleHp" parameterType="com.rpg.fried_shrimp.model.Battle">
+        UPDATE battle SET player_hp = #{playerHp}, enemy_hp = #{enemyHp} WHERE battle_id = #{battleId}
+    </update>
+
+    <select id="getCurrentTurn" parameterType="int" resultType="int">
+        SELECT turn FROM battle WHERE battle_id = #{battleId}
+    </select>
+
+    <update id="setCurrentTurn" parameterType="map">
+        UPDATE battle SET turn = #{currentTurn} WHERE battle_id = #{battleId}
+    </update>
+
+    <update id ="updateBattle" parameterType="com.rpg.fried_shrimp.model.Battle">
+        UPDATE battle SET player_hp = #{playerHp}, enemy_hp = #{enemyHp}, turn = #{turn}, 
+            battle_result = #{battleResult} WHERE battle_id = #{battleId}
+    </update>
+    
+    <select id="setBattle" parameterType="com.rpg.fried_shrimp.model.Battle">
+        SELECT * FROM battle WHERE battle_id = #{battleId}
+    </select>
+
 
 </mapper>

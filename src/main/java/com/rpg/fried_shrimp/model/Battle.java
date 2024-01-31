@@ -19,5 +19,23 @@ public class Battle {
     public enum BattleResult{
     	WIN,LOSE
     }
+
+    public int getPlayerHp() {
+        return this.playerHp;
+    }
+
+    public int getEnemyHp() {
+        return this.enemyHp;
+    }
+
+    public int getCurrentTurn() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCurrentTurn'");
+    }
+
+    public void setCurrentTurn(int determineInitialTurn) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCurrentTurn'");
+    }
   
 }

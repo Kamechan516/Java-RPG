@@ -15,4 +15,9 @@ public class Enemy{
 		type1, type2, type3
 
 	}
+
+    public int performAction(int enemyHp) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'performAction'");
+    }
 }

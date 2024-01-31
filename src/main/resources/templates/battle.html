@@ -1,34 +1,67 @@
-<!-- src/main/resources/templates/battle/start.html -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Battle Start</title>
-    <link rel="stylesheet" href="../static/css/battle.css">
+    <link rel="stylesheet" th:href="@{/css/battle.css}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script th:src="@{/js/battle.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
 </head>
 <body>
     <form th:action="@{/battle/result}" th:object="${battle}" method="post">
         <!-- バトルに関するフォーム項目を適切に設計 -->
         <div class="battle_screen">
             <!-- 敵HP -->
-            <p style="text-align: right;" class="en_hp_detail">敵HP100/100：</p>
+            <div class="en_hp_detail">
+                <label for="enemyHp">Enemy HP</label>
+                <span th:text="${battle.enemyHp}"></span>
+                <div class="progress">
+                    <!-- enemyHpがnullでないことを確認してから計算を行う -->
+                    <div th:if="${battle.enemyHp != null}" th:style="'width: ' + ${battle.enemyHp * 100 / enemy.enemyHp} + '%'"
+                        style="width: 0%;"></div>
+                    <!-- enemyHpがnullの場合は適切な処理を行う -->
+                    <div th:if="${battle.enemyHp == null}" style="width: 0%;"></div>
+                </div>
+
+                <!-- Enemy Image -->
+                <img th:src="@{'/img/enemy' + ${battle.enemyId} + '.png'}" th:alt="@{'Enemy ' + ${battle.enemyId} + ' Image'}">
+            </div>
+
+            <!-- プレイヤー名とジョブ名 -->
+            <p class="player_detail">
+                プレイヤー：<span th:text="${player.playerName}"></span><br/>
+                ジョブ：<span th:text="${job.jobName}"></span>
+            </p>
 
             <!-- 自分HP -->
-            <p class="my_hp_detail">自分HP100/100：</p>
-
-            <!-- バトルメッセージと技ボタンの大枠 -->
-            <div class="battle_bar" >
-                <!-- バトルメッセージ -->
-                <p class= "message">hello</p>
-
-                <!-- 技ボタンのまとまり -->
-                <div class="battle_buttons">
-                    <!-- 技ボタン -->
-                    <input type="submit" value="Attack1" class="battle_button">
-                    <input type="submit" value="Attack2" class="battle_button"><br/>
-                    <input type="submit" value="Attack3" class="battle_button">
-                    <input type="submit" value="Attack4" class="battle_button">
+            <div class="my_hp_detail">
+                <label for="playerHp">Your HP</label>
+                <span th:text="${battle.playerHp}"></span>
+                <div class="progress player_progress"> <!-- プレイヤーバーとプレイヤー名の間の余白を適用 -->
+                    <!-- playerHpがnullでないことを確認してから計算を行う -->
+                    <div th:if="${battle.playerHp != null}" th:style="'width: ' + ${battle.playerHp * 100 / job.jobHp} + '%'"
+                        style="width: 0%;"></div>
+                    <!-- playerHpがnullの場合は適切な処理を行う -->
+                    <div th:if="${battle.playerHp == null}" style="width: 0%;"></div>
                 </div>
+                <img th:src="@{'/img/player' + ${player.jobId} + '.png'}" th:alt="@{'player ' + ${player.jobId} + ' Image'}">
+            </div>
+        </div>
+
+        <!-- バトルメッセージと技ボタンの大枠 -->
+        <div class="battle_bar">
+            <!-- バトルメッセージ -->
+            <p class="message" id="battleMessage">hello</p>
+
+            <!-- 技ボタンのまとまり -->
+            <div class="battle_buttons">
+                <!-- 技ボタン -->
+                <input type="button" value="Attack1" class="battle_button" onclick="attack(1)">
+                <input type="button" value="Attack2" class="battle_button" onclick="attack(2)"><br/>
+                <input type="button" value="Attack3" class="battle_button" onclick="attack(3)">
+                <input type="button" value="Attack4" class="battle_button" onclick="attack(4)">
             </div>
         </div>
     </form>

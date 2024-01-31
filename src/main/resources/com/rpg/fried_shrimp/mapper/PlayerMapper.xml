@@ -60,6 +60,9 @@
 			(#{playerId}, #{skillId})
 		</foreach>
 	</insert>
+	<select id="selectPlayer" resultMap="PlayerResultMap">
+		select * from player where player_id = #{playerId}
+	</select>
 
 	<!-- 他にも必要なクエリがあれば追加 -->
 

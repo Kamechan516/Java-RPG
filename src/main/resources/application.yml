@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://db:3306/FriedShrimp
+    url: jdbc:mariadb://localhost:3306/FriedShrimp
     username: root
     password: Password-1234
     driverClassName: org.mariadb.jdbc.Driver

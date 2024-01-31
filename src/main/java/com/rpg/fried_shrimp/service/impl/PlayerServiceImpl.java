@@ -5,17 +5,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rpg.fried_shrimp.mapper.JobMapper;
 import com.rpg.fried_shrimp.mapper.PlayerMapper;
 import com.rpg.fried_shrimp.model.Player;
 import com.rpg.fried_shrimp.service.PlayerService;
-
+import com.rpg.fried_shrimp.model.Job;
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
 	private PlayerMapper playerMapper;
 
-	@Override
+	@Autowired
+	private JobMapper jobMapper;
+
+	public Player selectPlayer(int id) {
+		Player player = playerMapper.selectPlayer(id);
+		return player;
+	}
+
+	public Job selectJobHp(int jobId) {
+		Job jobHp = jobMapper.selectJob(jobId);
+		return jobHp;
+	}
+
 	public Player getPlayerById(int id) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
@@ -57,10 +70,10 @@ public class PlayerServiceImpl implements PlayerService {
 		}
 	}
 
-	public int insertPlayer(String playerName, int jobId) {
-		// プレイヤーを挿入し、挿入後のプレイヤーIDを取得
-		Player newPlayer = createPlayer(playerName, jobId);
-		return newPlayer.getPlayerId();
-	}
+	// public int insertPlayer(String playerName, int jobId) {
+	// 	// プレイヤーを挿入し、挿入後のプレイヤーIDを取得
+	// 	Player newPlayer = createPlayer(playerName, jobId);
+	// 	return newPlayer.getPlayerId();
+	// }
 
 }

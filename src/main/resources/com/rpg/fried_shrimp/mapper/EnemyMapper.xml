@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rpg.fried_shrimp.mapper.EnemyMapper">
+    <!-- テーブルのカラム名と、モデルのフィールド名をマッピング -->
+    <resultMap id="EnemyResultMap" type="com.rpg.fried_shrimp.model.Enemy">
+        <id property="enemyId" column="enemy_id" />
+        <result property="enemyName" column="enemy_name" />
+        <result property="enemyHp" column="enemy_hp" />
+        <result property="enemyType" column="enemy_type" />
+    </resultMap>
+
+    <select id="selectEnemy" resultMap="EnemyResultMap" resultType="com.rpg.fried_shrimp.model.Enemy">
+        select * from enemy where enemy_id = #{enemyId}
+    </select>
+</mapper>

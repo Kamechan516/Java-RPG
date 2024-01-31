@@ -19,11 +19,12 @@ public class PlayerControllerImpl implements PlayerController {
 	   @Autowired
 	    private PlayerServiceImpl playerService;
 
-	   @PostMapping(value = "/create/player", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	   @PostMapping(value = "/createPlayer", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	   public String createPlayer(@RequestParam String playerName, @RequestParam int jobId) {
 	       // プレイヤーを作成するためのロジック
 	       Player player = playerService.createPlayer(playerName, jobId);
-	       return "redirect:/success"; // 成功ページにリダイレクト
+		   int playerId = player.getPlayerId();
+	       return "redirect:/battle/" + playerId; // 成功ページにリダイレクト
 	   }
 	    
 
