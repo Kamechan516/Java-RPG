@@ -7,6 +7,7 @@
 <configuration>
 	<properties>
 		<!-- プロパティの設定があればここに追加 -->
+		<property logging.level.org.mybatis=DEBUG />
 	</properties>
 	<settings>
 		<!-- 遅延読み込みを有効にする -->
@@ -39,13 +40,13 @@
 
 				<!-- MariaDB 接続 URL -->
 				<property name="url"
-					value="jdbc:mariadb://localhost:3340/FriedShrimp" />
+					value="jdbc:mariadb://localhost:3306/FriedShrimp" />
 
 				<!-- MariaDB ユーザー名 -->
 				<property name="username" value="root" />
 
 				<!-- MariaDB パスワード -->
-				<property name="password" value="12345" />
+				<property name="password" value="Password-1234" />
 			</dataSource>
 		</environment>
 	</environments>

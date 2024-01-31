@@ -28,7 +28,7 @@ public interface BattleController {
     
     // 再挑戦用
     //@GetMapping("/battle/retry/{enemyId}")
-    public String retryBattle(@PathVariable Long enemyId, Model model);
+    public String retryBattle(@PathVariable int enemyId, Model model);
     
     // 次のバトルへ
     //@PostMapping("/battle/next")

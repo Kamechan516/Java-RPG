@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.rpg.fried_shrimp.controller.GameController;
 import com.rpg.fried_shrimp.mapper.JobMapper;
 import com.rpg.fried_shrimp.mapper.PlayerMapper;
+import com.rpg.fried_shrimp.model.Battle;
 import com.rpg.fried_shrimp.model.Job;
 import com.rpg.fried_shrimp.model.Player;
 import com.rpg.fried_shrimp.service.impl.PlayerServiceImpl;
@@ -42,21 +43,27 @@ public class GameControllerImpl implements GameController {
 		return "index";
 	}
 
-	@PostMapping("/create/player")
-	public String createPlayer(@ModelAttribute Player player) {
-		// プレイヤーを挿入し、挿入後のプレイヤーIDを取得
-		int playerId = playerService.insertPlayer(player.getPlayerName(), player.getJobId());
-
-		// リダイレクト
-		return "redirect:/waiting/" + playerId;
-	}
-
-	@GetMapping("waiting/{playerId}")
-	public String waiting(@PathVariable int playerId, Model model) {
-		Player player = playerService.getPlayerById(playerId);
-		model.addAttribute("player", player);
-		return "waiting";
-	}
+	// @GetMapping("/success")
+	// public String createPlayerSuccess(@ModelAttribute Player player) {
+	// 	// プレイヤーIDを渡すために、Playerオブジェクトから取得
+	// 	int playerId = player.getPlayerId();
+	
+	// 	return "redirect:battle/" + playerId;
+	// }
+	
+	
+	// @GetMapping("battle/{playerId}")
+	// public String BattleStart(@PathVariable int playerId, @ModelAttribute Player player, Model model) {
+	// 	// プレイヤーIDを使用してプレイヤー情報を取得
+		
+	// 	player = playerService.selectPlayer(playerId);
+	// 	Job job = jobMapper.selectJob(player.getJobId());
+	// 	Battle battle = battleservice(player,job);
+	// 	// プレイヤー情報をThymeleafに追加
+	// 	model.addAttribute("player", player);
+	// 	model.addAttribute("job", job);
+	// 	return "battle";
+	// }
 
 	@Override
 	public String showRanking(Model model) {
