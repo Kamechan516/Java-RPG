@@ -3,20 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.rpg.fried_shrimp.mapper.SkillMapper">
+<mapper namespace="com.rpg.fried_shrimp.mapper.PlayerSkillMapper">
 
-	<resultMap id="SkillResultMap"
+	<resultMap id="PlayerSkillResultMap"
 		type="com.rpg.fried_shrimp.model.PlayerSkill">
 		<id property="plSkillId" column="pl_skill_id" />
 		<result property="plSkillName" column="pl_skill_name" />
 		<result property="plSkillType" column="pl_skill_type" />
 		<result property="plSkillEffect" column="pl_skill_effect" />
+		<result property="plSkillRemain" column="pl_skill_remain" />
 		<result property="jobId" column="job_id" />
 	</resultMap>
 
 
 	<select id="findPlayerSkills">
 
+	</select>
+
+	<select id="getAllSkills" resultMap="PlayerSkillResultMap">
+		SELECT * FROM player_skill where job_id = #{jobId}
+	</select>
+
+	<select id="getSelectedSkills" resultMap="PlayerSkillResultMap" parameterType="java.util.List">
+		SELECT * FROM player_skill WHERE pl_skill_id IN
+		<foreach collection="list" item="skillId" open="(" separator="," close=")">
+			#{skillId}
+		</foreach>
 	</select>
 
 </mapper>

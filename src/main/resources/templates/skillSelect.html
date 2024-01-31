@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>技の管理</title>
+    <meta charset="UTF-8"/>
+    <!-- BootstrapのCSSを追加 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+
+    <h1>技の管理</h1>
+    
+    <p>所持技一覧</p>
+    <!-- フォーム内で選択可能なスキル一覧を表示 -->
+    <form method="post" th:action="@{'/update_skills/' + ${playerId}}" id="skillForm">
+        <ul class="list-group">
+            <li th:each="playerSkill : ${skills}" class="list-group-item">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" th:value="${playerSkill.plSkillId}" name="selectedSkillIds"/>
+                    <label class="form-check-label">
+                        <span th:text="${playerSkill.plSkillName}"></span> - 
+                        <span>効果: <span th:text="${playerSkill.plSkillEffect}"></span></span> - 
+                        <span>残り回数: <span th:text="${playerSkill.plSkillRemain}"></span></span> - 
+                        <span>種類: <span th:text="${playerSkill.plSkillType}"></span></span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <!-- バトル開始ボタンを追加 -->
+        <button type="button" class="btn btn-primary mt-3" onclick="validateSkills()">バトル開始</button>
+    </form>
+
+    <form method="post" th:action="@{'/battle/' + ${playerId}}" class="mt-3" id="battleForm" style="display: none;">
+        <input type="hidden" name="playerId" th:value="${playerId}" />
+        <button type="submit" class="btn btn-success">バトル開始</button>
+    </form>
+    
+
+
+    <form method="post" th:action="@{'/'}" class="mt-3">
+        <button type="submit" class="btn btn-secondary">トップ画面へ</button>
+    </form>
+    
+
+    <!-- BootstrapのJSとPopper.js、jQueryを追加 -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        function validateSkills() {
+            var selectedSkills = document.querySelectorAll('input[name="selectedSkillIds"]:checked');
+            if (selectedSkills.length === 4) {
+                document.getElementById('skillForm').style.display = 'none';
+                document.getElementById('battleForm').style.display = 'block';
+            } else {
+                alert('4つのスキルを選択してください。');
+            }
+        }
+    </script>
+</body>
+</html>

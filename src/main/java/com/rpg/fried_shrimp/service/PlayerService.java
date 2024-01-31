@@ -7,7 +7,6 @@ import com.rpg.fried_shrimp.model.Player;
 //@Service
 public interface PlayerService {
     Player getPlayerById(int id);
-    Player getPlayerByName(String name);
     List<Player> getTopRanking();
     
     //@Autowired

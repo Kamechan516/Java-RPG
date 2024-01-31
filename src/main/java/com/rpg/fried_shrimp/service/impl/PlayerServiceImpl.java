@@ -7,73 +7,57 @@ import org.springframework.stereotype.Service;
 
 import com.rpg.fried_shrimp.mapper.JobMapper;
 import com.rpg.fried_shrimp.mapper.PlayerMapper;
+import com.rpg.fried_shrimp.model.Job;
 import com.rpg.fried_shrimp.model.Player;
 import com.rpg.fried_shrimp.service.PlayerService;
-import com.rpg.fried_shrimp.model.Job;
+
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
-	@Autowired
-	private PlayerMapper playerMapper;
+    @Autowired
+    private PlayerMapper playerMapper;
 
-	@Autowired
-	private JobMapper jobMapper;
+    @Autowired
+    private JobMapper jobMapper;
 
-	public Player selectPlayer(int id) {
-		Player player = playerMapper.selectPlayer(id);
-		return player;
-	}
+    public Player selectPlayer(int id) {
+        return playerMapper.selectPlayer(id);
+    }
 
-	public Job selectJobHp(int jobId) {
-		Job jobHp = jobMapper.selectJob(jobId);
-		return jobHp;
-	}
+    public Job selectJobHp(int jobId) {
+        return jobMapper.selectJob(jobId);
+    }
 
-	public Player getPlayerById(int id) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    public Player getPlayerById(int id) {
+        return playerMapper.getPlayerById(id);
+    }
 
-	@Override
-	public Player getPlayerByName(String name) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 
-	@Override
-	public List<Player> getTopRanking() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    public Player createPlayer(String playerName, int jobId) {
+        Player newPlayer = new Player();
+        newPlayer.setPlayerName(playerName);
+        newPlayer.setJobId(jobId);
 
-	// ここにコンストラクタを追加
-	public PlayerServiceImpl() {
-		// コンストラクタの初期化処理
-	}
+        int rowsAffected = playerMapper.insertPlayer(newPlayer);
 
-	public Player createPlayer(String playerName, int jobId) {
-		// Playerオブジェクトを作成
-		Player newPlayer = new Player();
-		newPlayer.setPlayerName(playerName);
-		newPlayer.setJobId(jobId);
+        if (rowsAffected > 0) {
+            return newPlayer;
+        } else {
+            throw new RuntimeException("Player creation failed");
+        }
+    }
 
-		// PlayerMapperを使用してinsertする処理
-		int rowsAffected = playerMapper.insertPlayer(newPlayer);
+    public List<Job> getAllJobs() {
+        return jobMapper.getAllJob();
+    }
 
-		// insertが成功した場合、新しいPlayerオブジェクトを返す
-		// 失敗した場合は適切なエラーハンドリングを行う
-		if (rowsAffected > 0) {
-			return newPlayer;
-		} else {
-			// もしくは例外をスローするなどのエラーハンドリングを行う
-			throw new RuntimeException("Player creation failed");
-		}
-	}
+    public int createPlayer(Player player) {
+        return playerMapper.insertPlayer(player);
+    }
 
-	// public int insertPlayer(String playerName, int jobId) {
-	// 	// プレイヤーを挿入し、挿入後のプレイヤーIDを取得
-	// 	Player newPlayer = createPlayer(playerName, jobId);
-	// 	return newPlayer.getPlayerId();
-	// }
-
+    @Override
+    public List<Player> getTopRanking() {
+        // TODO: トップランキングを取得する処理を実装
+        return null;
+    }
 }
